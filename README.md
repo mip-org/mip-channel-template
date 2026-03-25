@@ -4,7 +4,7 @@ This repo is a [MIP](https://github.com/mip-org/mip-package-manager) package cha
 
 ## Creating your own channel
 
-1. **Fork** (or use as template) this repo.
+1. **Fork** [mip-org/mip-channel-base](https://github.com/mip-org/mip-channel-base).
 2. **Edit `channel.yaml`** — set `channel` to a short name and `github_repo` to your `owner/repo`.
 3. **Enable GitHub Pages** — go to Settings > Pages and set source to "GitHub Actions".
 4. **Add packages** — create directories under `packages/` (see below).
