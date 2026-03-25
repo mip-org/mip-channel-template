@@ -674,8 +674,8 @@ class PackagePreparer:
         ]
         
         if len(package_dirs) == 0:
-            print("No package directories found")
-            return False
+            print("No package directories found. Nothing to do.")
+            return True
         
         print(f"Found {len(package_dirs)} package(s)")
         print(f"Output directory: {self.output_dir}")

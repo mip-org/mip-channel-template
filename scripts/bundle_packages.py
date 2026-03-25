@@ -135,8 +135,8 @@ class PackageBundler:
             True if all succeeded, False if any failed
         """
         if not os.path.exists(self.input_dir):
-            print(f"Error: input directory not found at {self.input_dir}")
-            return False
+            print(f"Input directory {self.input_dir} does not exist. Nothing to bundle.")
+            return True
         
         # Get all .dir directories
         dir_paths = [
