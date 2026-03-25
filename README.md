@@ -4,9 +4,8 @@ This repo is a [MIP](https://mip.sh) package channel. It hosts MATLAB packages a
 
 ## Creating your own channel
 
-1. **Fork** [mip-org/mip-channel-base](https://github.com/mip-org/mip-channel-base) and name it `mip-<channel_name>` (e.g., `mip-mylab`). The repo name must match the channel name.
-2. **Enable GitHub Actions** — go to the Actions tab in your fork and click "I understand my workflows, go ahead and enable them" (GitHub disables workflows on forks by default).
-3. **Enable GitHub Pages** — go to Settings > Pages and set source to "GitHub Actions".
+1. **Create from template** — click "Use this template" on [mip-org/mip-channel-base](https://github.com/mip-org/mip-channel-base) and name the new repo `mip-<channel_name>` (e.g., `mip-mylab`). The repo name must match the channel name.
+2. **Enable GitHub Pages** — go to Settings > Pages and set source to "GitHub Actions".
 4. **Edit `channel.yaml`** — set `channel` to your channel name and `github_repo` to your `owner/mip-<channel_name>`.
 5. **Add packages** — create directories under `packages/` (see below).
 6. **Push to `main`** — the CI workflow will build, upload, and index your packages automatically.
@@ -44,12 +43,15 @@ Package names must use underscores (not hyphens). The version in the YAML must m
 To pull in the latest infrastructure (scripts, workflows) from the base repo:
 
 ```bash
-git remote add upstream https://github.com/mip-org/mip-channel-base.git
-git fetch upstream
-git merge upstream/main
+# First time only:
+git remote add base https://github.com/mip-org/mip-channel-base.git
+
+# To update:
+git fetch base
+git merge base/main --allow-unrelated-histories
 ```
 
-Your `channel.yaml`, `packages/`, and `README.md` won't conflict since those are channel-specific.
+The `--allow-unrelated-histories` flag is needed because template repos don't share git history with the base. Your `channel.yaml` and `packages/` won't conflict since those are channel-specific.
 
 ## How it works
 
