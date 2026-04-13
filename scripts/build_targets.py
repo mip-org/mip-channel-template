@@ -33,9 +33,9 @@ LTO_LINK_FLAG_MSVC = "/LTCG"
 # GCC -march / -mtune per psABI level
 LINUX_X86_64_CPU_PROFILES = {
     "x86_64_v1": {"march": "x86-64",    "mtune": "generic"},
-    "x86_64_v2": {"march": "x86-64-v2", "mtune": "nehalem"},
-    "x86_64_v3": {"march": "x86-64-v3", "mtune": "haswell"},
-    "x86_64_v4": {"march": "x86-64-v4", "mtune": "skylake-avx512"},
+    "x86_64_v2": {"march": "x86-64-v2", "mtune": "generic"},
+    "x86_64_v3": {"march": "x86-64-v3", "mtune": "generic"},
+    "x86_64_v4": {"march": "x86-64-v4", "mtune": "generic"},
 }
 
 # MSVC /arch / /favor per psABI level
@@ -65,11 +65,8 @@ def get_compiler_env(architecture: str, cpu_level: str) -> Dict[str, str]:
 
     if architecture == "linux_x86_64":
         p = LINUX_X86_64_CPU_PROFILES[cpu_level]
-        # -fno-semantic-interposition: safe for shared libs (MEX), major inlining win
-        # -fno-plt: avoids PLT indirection for external calls
         base = (
             f"-O3 -march={p['march']} -mtune={p['mtune']} {LTO_FLAG_GCC}"
-            " -fno-semantic-interposition -fno-plt"
         )
         env.update({
             "MIP_MARCH": p["march"],
